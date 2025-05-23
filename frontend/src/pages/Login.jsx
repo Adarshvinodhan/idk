@@ -8,15 +8,15 @@ export default function LoginPage() {
 
   const handleLogin = async (formData) => {
     try {
-      const response = await api.post('/login', {
+      const response = await api.post('/auth/login', {
         email: formData.email,
         password: formData.password,
       });
       toast.success("Login Successful");
 
-      const { accessToken, refreshToken } = response.data;
+      const { accessToken } = response.data;
       localStorage.setItem('accessToken', accessToken);
-      localStorage.setItem('refreshToken', refreshToken);
+
 
       navigate('/');
     } catch (err) {
@@ -31,7 +31,7 @@ export default function LoginPage() {
   };
 
   return (
-<div className="flex items-center justify-center min-h-screen bg-gray-50">
+<div className="flex items-center justify-center min-h-screen bg-gray-100">
   <AuthForm
     title="Login"
     onSubmit={handleLogin}
